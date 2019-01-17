@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Result</title>
+      <link rel="stylesheet" media="screen" href={% static "style1.css" %}>
+    <link rel="stylesheet" href="{% static "result.css" %}">
+
+</head>
+<body>
+<div id="particles-js"></div>
+<script src={% static "particles.js" %}></script>
+<script src={% static "app.js" %}></script>
+<script src="{% static "jquery-3.3.1.js" %}"></script>
+<script src="{% static "jquery.color-2.1.2.js" %}"></script>
+<div id="load">
+    <span id="laod_text">
+        Calculating...
+    </span>
+</div>
+{#<button id="butt" value="click" onclick="f()"></button>#}
+
+<div id="maindiv">
+    <div id="subdiv">
+    <span>训练精度</span><br><br>
+    <span>{{ 训练精度 }}</span><br><br>
+    <span>预测结果:</span><br><br>
+    <span>{{ result }}</span><br><br>
+    <span>评估:</span><br><br>
+    <span>{{ 评估 }}</span><br><br>
+    </div>
+</div>
+
+<div id="mainsugg">
+    <div id="subsugg">
+
+    </div>
+</div>
+
+
+</body>
+</html>
+
+<script language="JavaScript">
+    var result = {{ result|safe }};
+     $(document).ready(function () {
+         var temp = $("#particles-js");
+         if (result == 'False'){
+             temp.delay(3000).animate({backgroundColor:'#8eff86'}, 2000);
+             $("#subsugg").html("根据您提供的数据, 我们得出以下结论:<br>" +
+                 "依您现在的身体状况, 您未来会患糖尿病的概率较低 <br><br>" +
+             "您的BMI值为: {{ bmi }}<br><br>" +
+             "BMI是指身体质量指数, 是目前国际上常用的衡量人体胖瘦程度以及是否健康的一个标准<br><br>"+
+             "分类:<br>" +
+                 "\t偏瘦\t<= 18.4\n<br>" +
+                 "\t正常\t18.5 ~ 23.9\n<br>" +
+                 "\t过重\t24.0 ~ 27.9\n<br>" +
+                 "\t肥胖\t>= 28.0<br><br>"+
+             "若想预防糖尿病的发生, 我们有如下建议:<br>"+
+             "1. 控制游离糖分以及高热量食物的摄入, 以减轻身体代谢压力<br>"+
+             "2. 保证有效的运动时间, 如果能保证长期规律运动，发生糖尿病的风险可以下降15-60%<br>"+
+             "3. 有规律地监测血糖值并记录, 测量分为空腹血糖和餐后血糖, 若发现血糖值偏高, 则应提高警惕, 及时就医<br>");
+         }
+         else{
+
+             temp.delay(3000).animate({backgroundColor:'#ffa09e'}, 2000)
+              $("#subsugg").html("根据您提供的数据, 我们得出以下结论:<br>" +
+                  "依您现在的身体状况, 您未来会患糖尿病的概率较高 <br><br>"+
+                           "您的BMI值为: {{ bmi }}<br><br>" +
+             "BMI是指身体质量指数, 是目前国际上常用的衡量人体胖瘦程度以及是否健康的一个标准<br><br>"+
+             "分类:<br>" +
+                 "\t偏瘦\t<= 18.4\n<br>" +
+                 "\t正常\t18.5 ~ 23.9\n<br>" +
+                 "\t过重\t24.0 ~ 27.9\n<br>" +
+                 "\t肥胖\t>= 28.0<br><br>"+
+                  "对于糖尿病高危人群, 我们有如下建议:<br>"+
+
+              "1. 戒烟，戒酒，糖尿病患者应该戒烟戒酒，保持良好的生活习惯<br>"+
+              "2. 少吃盐分高的食物，过多的盐分促进小肠吸收游离的葡萄糖，使得人体血糖升高<br>"+
+                  "3. 保证有效的运动时间, 如果能保证长期规律运动，发生糖尿病的风险可以下降15-60%"+
+              "4. 若已患糖尿病, 遵医嘱按时服药, 切忌私自停药<br>"+
+              "5. 有规律地监测血糖值并记录, 多与医生交流<br>")
+         }
+
+     })
+
+
+
+</script>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static "home.css" %}">
+      <link rel="stylesheet" media="screen" href={% static "style.css" %}>
+</head>
+<body>
+<div id="particles-js"></div>
+<script src={% static "particles.js" %}></script>
+<script src={% static "app.js" %}></script>
+
+
+<div id="wel_back">
+</div>
+    <span id="main">
+    Welcom to our page.
+</span>
+<div id="_welcome">
+
+    <span id="wel_text">
+        <h2>欢迎来到我们的网站, 我们通过分析响预测的几项身体数据, 预测您是否为糖尿病高危人群. 点击按钮进入.</h2>
+    </span>
+    <button id="wel_button" onclick="window.open('/input')">Start</button>
+</div>
+
+</body>
+</html>

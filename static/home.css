@@ -1,0 +1,102 @@
+#_welcome{
+    position: absolute;
+    top: 100px;
+    left: 550px;
+    opacity: 0;
+
+    -webkit-animation: myanimation 1.5s;
+    -o-animation: myanimation 1.5s;
+    animation: myanimation 1.5s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+@keyframes myanimation{
+    0%{opacity:0}
+    50%{opacity:0;}     /*通过不同阶段的动画实现动画延迟*/
+    100%{opacity:1;}
+}
+
+#wel_text{
+    position: absolute;
+    top: 200px;
+    left: 150px;
+    font-size: 20px;
+    width: 600px;
+    text-indent:2em;
+    z-index: 4;
+}
+#wel_img{
+    position: center;
+    opacity: 0.5;
+}
+#wel_button{
+    position: absolute;
+    top: 400px;
+    left: 400px;
+}
+
+#wel_back{
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    position: absolute;
+    top: 150px;
+    left: 650px;
+    width: 700px;
+    height: 500px;
+    opacity: 0.7;
+
+    -webkit-animation: back_animation 1.5s;
+    -o-animation: back_animation 1.5s;        /*背景动画效果*/
+    animation: back_animation 1.5s;
+}
+@keyframes back_animation {
+    0% {opacity: 0; left: 620px; top: 180px}
+    25%{opacity: 0; left: 620px; top: 180px}
+
+    50%{opacity: .3; left: 640px; top: 160px}
+    100%{opacity: .5; left: 650px; top: 150px}
+
+}
+
+#main{          /*标题动画*/
+    position: absolute;
+    top: 170px;
+    opacity: 0;
+    left: 740px;
+    width: 500px;
+    text-shadow: 2px 2px 2px #949494;
+  font-size: 50px;
+  margin: 30px;
+    -webkit-animation: title_animation 1s;
+    -o-animation: title_animation 1s;
+    animation: title_animation 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+}
+@keyframes title_animation {
+    0%{opacity: 0; top: 190px; left: 720px;}
+    100%{opacity: 1; top: 170px; left: 750px;}
+
+}
+
+#formone{
+  position: absolute;
+  top: 500px;
+  left: 700px;
+  font-size: 15px;
+  background-color: blueviolet;
+}
+
+#spanusername{
+  margin: 20px;
+  background-color: brown;
+}
+
+#spanpassword{
+  margin: 20px;
+  background-color: #13E8E9;
+}
+#submit{
+  margin-left: 150px;
+  background-color: aqua;
+}

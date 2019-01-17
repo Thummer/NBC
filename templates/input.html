@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>数据采集</title>
+    <link rel="stylesheet" href="{% static "input.css"%}">
+    <link rel="stylesheet" media="screen" href={% static "style.css" %}>
+</head>
+<body>
+<div id="particles-js"></div>
+<script src={% static "particles.js" %}></script>
+<script src={% static "app.js" %}></script>
+<script src="{% static "jquery-3.3.1.js" %}"></script>
+
+
+
+<div id="form" style="overflow-x: hidden">
+    <form action="/result/" method="post" class="style" >
+        {% csrf_token %}
+    <h1>
+        Information
+        <span>Please fill all the texts in the fields.</span>
+    </h1>
+    <label>
+        <span>Gender:</span><br><br>
+        <input type="radio" id="gender1" value="0" name="gender" onclick="check(value)" required="required">Male<br>
+        <input type="radio" id="gender2" value="1" name="gender" onclick="check(value)" required="required">Female<br>
+    </label>
+
+    <label>
+        <span>Age:</span><br><br>
+        <input type="number" name="age" id="age" placeholder="Input your age" required="required">
+    </label><br>
+
+
+    <label>
+        <span>Weight: (Kg)</span><br>
+        <input id="weight" type="number" name="weight" placeholder="P
+lease input your weight" required="required">
+    </label><br>
+
+    <label>
+        <span>Height: (cm)</span><br><br>
+        <input type="number" name="height" id="height" placeholder="Input your height" required="required" onfocus="bmicalc()">
+    </label><br>
+
+    <label>
+        <span>Blood Sugar: (mg/dL)</span><br><br>
+        <input type="number" name="sugar" id="sugar" placeholder="Blood Sugar Level" required="required">
+    </label><br>
+
+    <label>
+        <span>Blood Pressure (mmHg)</span><br><br>
+        <input type="number" id="pressure1" name="pressure" placeholder="Systolic" required="required"><br>
+    </label><br>
+
+    <label style="display: none" id="lbpregancy">
+        <span>Have You Preganted</span><br><br>
+        <input type="radio" name="pregancy" id="pregancy0" value="1" onclick="check1(value)" required="required">Yes<br>
+        <input type="radio" name="pregancy" id="pregancy" value="0" onclick="check1(value)" required="required">No<br>
+    </label>
+
+    <label id="lbpregancytime" style="display: none">
+        <span>Pregancy</span><br><br>
+        <input type="number" name="pregancytime" id="pregancytime" placeholder="Pregancy" required="required"><br>
+    </label>
+
+
+    <label>
+        <span>Insulin: (mu U/ml)</span><br><br>
+        <input type="number" name="insulin" id="insulin" placeholder="Input your insulin" required="required">
+    </label><br>
+
+    <label>
+        <span>*SkinThickness: (mm)</span><br><br>
+        <input type="number" name="skin" id="skin" placeholder="Input your Skin Thickness">
+    </label><br>
+
+
+
+    <label>
+        <span>*Diabetes pedigree function</span><br><br>
+        <input type="number" id="func" name="func" placeholder="Diabetes pedigree function" step="0.001"><br>
+    </label><br>
+
+    <label>
+        <input type="submit" value="Submit">
+    </label>
+</form>
+
+</div>
+
+    <div id="tip1">
+        请输入您的年龄, 对于我们的算法来说, 您的年龄是非常重要的一个数据. <br><br>
+        输入提示: 请输入一个正整数
+    </div>
+    <div id="tip2">
+        请输入您的体重, 了解您的身体数据有利于我们更加了解您的身体情况. <br><br>
+        输入提示: 请输入一个整数
+    </div>
+    <div id="tip3">
+        通过您的身高和体重, 我们可以计算出您的BMI指数, 这可以反应您的身体健康程度: <br><br>
+
+    </div>
+    <div id="tip4">
+        您的血糖指数是预测的关键, 有效数据为口服葡萄糖耐受测试后两小时的血糖指数. <br><br>
+        输入提示: 输入单位为 mg/dl(毫克/分升), 与常见的mmol/L不同, 下面给出换算关系: <br><br>
+        1mmol/L=18mg/dL <br><br>
+        请输入一个整数
+    </div>
+    <div id="tip5">
+        已经进行了一大半了, 在这里, 请输入您的舒张压, 也就是平时所说的'低压' <br><br>
+        输入提示: 请输入一个整数
+    </div>
+    <div id="tip6">
+        血浆胰岛素浓度, 有效数据为口服葡萄糖耐受测试后两小时的胰岛素浓度 <br><br>
+        输入提示: 请输入一个整数
+    </div>
+    <div id="tip7">
+        此处的皮肤厚度特指肱三头肌后侧皮肤厚度, 如数据缺失, 可不填. <br><br>
+        输入提示: 选填项 请输入一个整数
+    </div>
+    <div id="tip8">
+        此数据与家族病史有关, 如数据缺失, 可不填. <br><br>
+        输入提示: 选填项 请输入一个小数
+    </div>
+    <div id="bmi">
+        BMI:
+    </div>
+
+</body>
+</html>
+
+<script language="JavaScript">
+
+    function check(val) {
+        if(val == 1){
+            document.getElementById('lbpregancy').style.display='';
+            document.getElementById('pregancytime').value='';
+            var radio = document.getElementById('pregancy0');
+            radio.checked = true;
+        }else{
+            document.getElementById('lbpregancy').style.display='none';
+            document.getElementById('lbpregancytime').style.display='none';
+            document.getElementById('pregancytime').value='0';
+            var radio = document.getElementById('pregancy');
+            radio.checked = true;
+        }
+    }
+
+    function check1(val){
+        if(val == 1){
+            document.getElementById('lbpregancytime').style.display='';
+        }else{
+            document.getElementById('lbpregancytime').style.display='none';
+            document.getElementById('pregancytime').value='0'
+        }
+    }
+
+    function bmicalc(){
+        $("#tip3").animate({opacity:'1'});
+        var temp = $("#bmi");
+        temp.delay(2000);
+        temp.animate({opacity:'1'});
+
+        var weight = $("#weight").val();
+        $("#height").on('input propertychange', function () {
+            var height = $(this).val();
+            height = height/100;
+            var bmi = weight/(height*height);
+            bmi = bmi.toFixed(1);
+            var temp = $("#bmi");
+            temp.html('BMI:'+bmi);
+        });
+
+
+    }
+
+    $(document).ready(function(){
+        var temp = $("#age");
+        temp.focus(function(){
+             $("#tip1").animate({opacity:'1'});
+         });
+        temp.blur(function () {
+            $("#tip1").animate({opacity:'0'});
+        });
+    });
+
+
+    $(document).ready(function(){
+        var temp = $("#weight");
+        temp.focus(function(){
+             $("#tip2").animate({opacity:'1'});
+         });
+        temp.blur(function () {
+            $("#tip2").animate({opacity:'0'});
+        });
+    });
+
+
+    $(document).ready(function(){
+        var temp = $("#height");
+        temp.blur(function () {
+            $("#bmi").animate({opacity:'0'});
+            $("#tip3").animate({opacity:'0'});
+
+        });
+    });
+
+
+    $(document).ready(function(){
+        var temp = $("#sugar");
+        temp.focus(function(){
+             $("#tip4").animate({opacity:'1'});
+         });
+        temp.blur(function () {
+            $("#tip4").animate({opacity:'0'});
+        });
+    });
+
+
+    $(document).ready(function(){
+        var temp = $("#pressure1");
+        temp.focus(function(){
+             $("#tip5").animate({opacity:'1'});
+         });
+        temp.blur(function () {
+            $("#tip5").animate({opacity:'0'});
+        });
+    });
+
+
+    $(document).ready(function(){
+        var temp = $("#insulin");
+        temp.focus(function(){
+             $("#tip6").animate({opacity:'1'});
+         });
+        temp.blur(function () {
+            $("#tip6").animate({opacity:'0'});
+        });
+    });
+
+        $(document).ready(function(){
+        var temp = $("#skin");
+        temp.focus(function(){
+             $("#tip7").animate({opacity:'1'});
+         });
+        temp.blur(function () {
+            $("#tip7").animate({opacity:'0'});
+        });
+    });
+
+            $(document).ready(function(){
+        var temp = $("#func");
+        temp.focus(function(){
+             $("#tip8").animate({opacity:'1'});
+         });
+        temp.blur(function () {
+            $("#tip8").animate({opacity:'0'});
+        });
+    });
+</script>

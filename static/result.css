@@ -1,0 +1,84 @@
+#maindiv{
+    border-radius: 20px;
+    background: #FFFFFF;
+    width: 300px;
+    height: fit-content;
+    opacity: 0;
+    top: 200px;
+    left: 300px;
+    position: absolute;
+    -webkit-animation: _animation 1s;
+    -o-animation: _animation 1s;
+    animation: _animation 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 3.5s;
+}
+@keyframes _animation {
+    0%{
+        opacity: 0; left: 200px;
+        top: 150px;}
+    100%{opacity: 0.8; top: 130px;
+        left: 220px;}
+
+}
+
+#subdiv{
+    font-size: 20px;
+    margin: 30px;
+}
+
+#load{
+    background: #fff;
+    border-radius: 20px;
+    width: 400px;
+    opacity: 0;
+    position: absolute;
+    top: 500px;
+    left: 750px;
+    height: 100px;
+    -webkit-animation: load_anim 2.5s;
+    -o-animation: load_anim 2.5s;
+    animation: load_anim 2.5s;
+    animation-delay: 0.5s;
+}
+@keyframes load_anim {
+    0%{opacity: 0; top: 520px; left: 730px}
+    20%{opacity: 0.7; top: 500px; left: 750px}
+    80%{opacity: 0.7; top: 500px; left: 750px}
+    100%{opacity:0; top: 520px; left: 780px}
+
+}
+
+#laod_text{
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    font-size: 50px;
+}
+
+#mainsugg{
+    border-radius: 20px;
+    background: #FFFFFF;
+    width: 1000px;
+    height: fit-content;
+    opacity: 0;
+    top: 150px;
+    left: 650px;
+    position: absolute;
+    -webkit-animation: sugganimation 1s;
+    -o-animation: sugganimation 1s;
+    animation: sugganimation 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 4s;
+}
+@keyframes sugganimation {
+    0%{
+        opacity: 0; left: 630px;
+        top: 150px;}
+    100%{opacity: 0.8; top: 130px;
+        left: 650px;}
+}
+#subsugg{
+        font-size: 17px;
+    margin: 30px;
+}
